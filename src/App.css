@@ -1,38 +1,151 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;500;600;700;800&family=Baskervville:ital@0;1&display=swap');
+
+body {
+  background-color: #121214;
+  color: white;
+  font-family: 'Assistant', sans-serif;
+  direction: rtl;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cover {
+  max-width: 100%;
+  justify-self: center;
+  align-self: center;
+  background-image: url("https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?q=80&w=2560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  height: 420px;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: 80px;
+}
+
+.top-bar {
+  height: 65px;
+  background-color: black;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.top-bar .logo {
+  align-self: center;
+  width: 135px;
+}
+
+.welcome {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 512px;
+  margin-bottom: 80px;
+}
+
+.welcome .title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 48px;
+  font-weight: 300;
+  align-self: center;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.welcome .desc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 21px;
+  font-weight: 400;
+  align-self: center;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+#webcam-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  max-width: 512px;
+  height: 512px;
+  margin-bottom: 160px;
+  border: 1px solid #eeeeee;
+  border-radius: 30px;
+  canvas {
+    width: 100%;
+    height: 512px;
+    border-radius: 30px;
+  }
+  .screen {
+    width: 100%;
+    height: 100%;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.ticket {
+  transition: all 0.5s ease-in-out;
+  background-color: rgba(0, 0, 0, 0.838);
+  width: 512px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  position: absolute;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.ticket .name {
+  font-size: 22px;
+  text-align: center;
+  font-weight: 500;
+  align-self: center;
 }
 
-.App-link {
-  color: #61dafb;
+#loader {
+  text-align: center;
+  align-self: center;
+  justify-self: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#materials-panel {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.material {
+  padding: 16px;
+  aspect-ratio: 1/1;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+}
+
+.material .icon {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.material .name {
+  text-align: center;
+}
+
+.material .icon img {
+  width: 50px;
+  filter: invert(100%);
 }
