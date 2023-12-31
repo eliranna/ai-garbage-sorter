@@ -152,7 +152,9 @@ function App() {
   return (
     <div className="app">
       <div className='top-bar'>
-        <img className="logo" src="https://www.shavitim.com/shavitim-assets/logo.svg"/>
+        <a href='https://www.shavitim.com' target='_blank'>
+          <img className="logo" src="https://www.shavitim.com/shavitim-assets/logo.svg"/>
+        </a>
       </div>
       <div className='main-display'>
         <div className='side-image'/>

@@ -55,9 +55,12 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  a {
+    display: flex;
+  }
 }
 
-.top-bar .logo {
+.logo {
   align-self: center;
   width: 135px;
   margin-right: 107px;
