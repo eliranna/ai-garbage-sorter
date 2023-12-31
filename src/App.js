@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { ColorRing } from 'react-loader-spinner' 
 
 const materials = [
   {
@@ -10,34 +11,29 @@ const materials = [
     icon: './paper.svg'
   },
   {
-    title: 'פסולת אורגנית',
+    title: 'אורגני',
     name: 'Biological',
-    icon: './cookie.svg'
+    icon: './9026641_flower_thin_icon 1.svg'
   },
   {
     title: 'פלסטיק',
     name: 'Plastic',
-    icon: './cookie.svg'
+    icon: './9026367_beer_bottle_thin_icon 1.svg'
   },
   {
-    title: 'זכוכית לבנה',
+    title: 'זכוכית',
     name: 'White Glass',
-    icon: './cookie.svg'
-  },
-  {
-    title: 'זכוכית חומה',
-    name: 'Browen Glass',
-    icon: './cookie.svg'
+    icon: './9026898_martini_thin_icon (1) 1.svg'
   },
   {
     title: 'בגדים',
     name: 'Clothes',
-    icon: './cookie.svg'
+    icon: './9027071_t_shirt_thin_icon (1) 1.svg'
   },
   {
     title: 'קרטון',
     name: 'Cardboard',
-    icon: './cookie.svg'
+    icon: './9026598_codesandbox_logo_thin_icon 1.svg'
   },
   {
     title: 'נעליים',
@@ -46,7 +42,7 @@ const materials = [
   }
 ]
 
-const Material = ({icon, name, active}) => (
+const Material = ({icon, title, active}) => (
   <div className='material' style={{
     border: active ? '1px solid red' : ''
   }}>
@@ -54,8 +50,20 @@ const Material = ({icon, name, active}) => (
       <img src={icon}/>
     </div>
     <div className='name'>
-      {name}
+      {title}
     </div>
+  </div>
+)
+
+const Materials = () => {
+  return <div className='materials-bar'>
+    {materials.map(material => <Material {...material}/>)}
+  </div>
+}
+
+const Loader = () => (
+  <div id="loader">
+    מתחבר למצלמה שלך...
   </div>
 )
 
@@ -95,8 +103,24 @@ function App() {
       await webcam.play();
       window.requestAnimationFrame(loop);
 
+      // Create a new div element
+      var screen = document.createElement("div");
+      screen.className = 'screen';
+
+      // Create a new img element
+      var screenImg = document.createElement("div");
+      screenImg.className = 'circle';
+
+      var note = document.createElement("span");
+      note.className = 'note'
+      note.innerText = 'הציגו את הפריט שתרצו למיין';
+      // Append the img to the div
+      screen.appendChild(screenImg);
+      screen.appendChild(note);
+
       // append elements to the DOM
-      //document.getElementById("webcam-container").removeChild(document.getElementById('loader'))
+      document.getElementById("webcam-container").removeChild(document.getElementById('loader'))
+      document.getElementById("webcam-container").appendChild(screen);
       document.getElementById("webcam-container").appendChild(webcam.canvas);
   }
 
@@ -114,13 +138,8 @@ function App() {
         return (currentObj.probability > maxObj.probability) ? currentObj : maxObj;
       });
       const identifiedMaterial = materials.find(material => material.name == objectWithMaxProbability.className)
-      if (identifiedMaterial.name == materials[0].name) {
-        setIdentifiedMaterial(null)
-        setProb(null)
-      } else {
-        setIdentifiedMaterial(identifiedMaterial)
-        setProb(objectWithMaxProbability.probability)
-      }
+      setIdentifiedMaterial(identifiedMaterial)
+      setProb(objectWithMaxProbability.probability)
   }
 
   return (
@@ -128,27 +147,36 @@ function App() {
       <div className='top-bar'>
         <img className="logo" src="https://www.shavitim.com/shavitim-assets/logo.svg"/>
       </div>
-      <div className='cover'/>
-      <div className='welcome'>
-        <div className='title'>
-        פרוייקט גמר: ממחזר אשפה מבוסס בינה מלאכותית
-        </div>
-        <div className='desc'>
-        התנסו במחזור אשפה אוטומטי. ממחזר זה מבוסס על מודל למידה עמוקה אשר אומן על בסיס אלפי תצלומים של אשפה ממויינת.
-        </div>
-      </div>
-      <div id="webcam-container">
-        <div className='ticket' style={{
-          height: identifiedMaterial ? '65px' : '0px'
-        }}>
-          <div className='name'>
-            <span>{identifiedMaterial?.title} </span> <span>{prob?.toFixed(2)}</span>
-          </div>
-          <div className='icon'>
+      <div className='main-display'>
+        <div className='side-image'/>
+        <div className='content'>
+          <div className='content-inner'>
+            <div className='welcome'>
+              <div className='title'>
+              פרוייקט גמר: סורק פסולת מבוסס בינה מלאכותית.
+              </div>
+              <div className='desc'>
+              התנסו בסורק פסולת חכם אשר נבנה ע״י תלמידי שביטים. הסורק שלנו יודע להבחין בין שמונה סוגי פסולת שונים.
+              </div>
+            </div>
+            <div className='materials-bar-holder'>
+              <Materials/>
+            </div>
+            <div id="webcam-container">
+              <div className='ticket' style={{
+                height: identifiedMaterial ? '65px' : '0px'
+              }}>
+                <div className='name'>
+                  <span>{identifiedMaterial?.title} </span> <span>{`(ודאות: `}{prob?.toFixed(2)*100}{`%)`}</span>
+                </div>
+                <div className='icon'>
 
+                </div>
+              </div>
+              <Loader/>
+            </div>
           </div>
         </div>
-        <div className='screen'/>
       </div>
     </div>
   );
