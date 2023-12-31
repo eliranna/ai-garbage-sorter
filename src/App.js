@@ -86,6 +86,22 @@ function App() {
 
   // Load the image model and setup the webcam
   async function init() {
+
+      // Create the screen element
+      var screen = document.createElement("div");
+      screen.className = 'screen';
+      var loader = document.createElement("img");
+      loader.src = './loader.svg'
+      loader.id = 'loader';
+      screen.appendChild(loader);
+      
+      var note = document.createElement("span");
+      note.className = 'note'
+      note.innerText = 'מתחבר למצלמה שלך...';
+      screen.appendChild(note);
+
+      document.getElementById("webcam-container").appendChild(screen);
+
       const modelURL = URL + "model.json";
       const metadataURL = URL + "metadata.json";
 
@@ -103,25 +119,16 @@ function App() {
       await webcam.play();
       window.requestAnimationFrame(loop);
 
-      // Create a new div element
-      var screen = document.createElement("div");
-      screen.className = 'screen';
-
-      // Create a new img element
-      var screenImg = document.createElement("div");
-      screenImg.className = 'circle';
-
-      var note = document.createElement("span");
-      note.className = 'note'
-      note.innerText = 'הציגו את הפריט שתרצו למיין';
-      // Append the img to the div
-      screen.appendChild(screenImg);
-      screen.appendChild(note);
-
       // append elements to the DOM
-      document.getElementById("webcam-container").removeChild(document.getElementById('loader'))
-      document.getElementById("webcam-container").appendChild(screen);
+      var ld = document.getElementById('loader')
+      if (ld && ld.parentNode) {
+        ld.parentNode.removeChild(ld);
+      }
       document.getElementById("webcam-container").appendChild(webcam.canvas);
+      note.innerText = 'הציגו של הפריט שברצונכם למיין';
+      var circle = document.createElement("div");      
+      circle.id = 'circle';
+      screen.appendChild(circle);
   }
 
   async function loop() {
@@ -167,13 +174,13 @@ function App() {
                 height: identifiedMaterial ? '65px' : '0px'
               }}>
                 <div className='name'>
-                  <span>{identifiedMaterial?.title} </span> <span>{`(ודאות: `}{prob?.toFixed(2)*100}{`%)`}</span>
+                  <div>{identifiedMaterial?.title}</div> 
+                  <div className='per'>{`ודאות: `}{prob?.toFixed(2)*100}{`%`}</div>
                 </div>
                 <div className='icon'>
 
                 </div>
               </div>
-              <Loader/>
             </div>
           </div>
         </div>

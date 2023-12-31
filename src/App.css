@@ -99,7 +99,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 100%;
+  width: 350px;
   max-width: 350px;
   height: 350px;
   margin-bottom: 160px;
@@ -109,34 +109,36 @@ body {
     height: 350px;
     border-radius: 20px;
   }
-  .screen {
-    width: 350px;
-    height: 350px;
-    background-color: #121214a6;
+}
+
+.screen {
+  width: 350px;
+  height: 350px;
+  background-color: #0f0f11d6;
+  position: absolute;
+  border-radius: 20px;
+  .note {
+    text-align: center;
     position: absolute;
-    .note {
-      text-align: center;
-      position: absolute;
-      bottom: 60px;
-      right: 0px;
-      left: 0px;
-      margin-left: auto;
-      margin-right: auto;
-      width: 100px;
-    }
-    .circle {
-      width: 220px;
-      height: 220px;
-      border-radius: 100%;
-      border: 1px solid white;
-      position: absolute;
-      bottom: 20px;
-      right: 0px;
-      left: 0px;
-      margin-left: auto;
-      margin-right: auto;
-      opacity: 50%;
-    }
+    bottom: 60px;
+    right: 0px;
+    left: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100px;
+  }
+  #circle {
+    width: 220px;
+    height: 220px;
+    border-radius: 100%;
+    border: 2px solid #fdf21159;
+    position: absolute;
+    bottom: 20px;
+    right: 0px;
+    left: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 50%;
   }
 }
 
@@ -154,17 +156,39 @@ body {
   z-index: 999999;
 }
 .ticket .name {
-  font-size: 22px;
+  font-size: 18px;
   text-align: right;
   font-weight: 500;
-  align-self: flex-start;
-  margin-right: 20px;
+  align-self: center;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ticket .name .per {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 #loader {
   text-align: center;
   align-self: center;
   justify-self: center;
+  animation: spin 2s linear infinite;
+  width: 48px;
+  height: 48px;
+  text-align: center;
+  position: absolute;
+  bottom: 160px;
+  right: 0px;
+  left: 0px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .materials-bar-holder {
