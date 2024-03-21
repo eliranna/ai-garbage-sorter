@@ -166,7 +166,7 @@ function App() {
           <div className="content-inner">
             <div className="welcome">
               <div className="title">
-                פרוייקט 2: סורק פסולת מבוסס בינה מלאכותית.
+                סורק פסולת מבוסס בינה מלאכותית
               </div>
               <div className="desc">
                 התנסו בסורק פסולת חכם אשר נבנה ע״י תלמידי שביטים. הסורק שלנו
